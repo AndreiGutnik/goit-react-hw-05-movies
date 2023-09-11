@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
 import { ScrollUp } from './ScrollUp/ScrollUp';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { animateScroll as scroll } from 'react-scroll';
 
@@ -24,7 +24,7 @@ export const App = () => {
   };
 
   return (
-    <Layout>
+    <Layout onWheel={onScroll}>
       {isScrollUp && <ScrollUp onClick={onScrollUp} />}
       <ToastContainer autoClose={3000} />
       <GlobalStyle />
