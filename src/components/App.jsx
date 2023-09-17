@@ -1,33 +1,41 @@
-import { useState } from 'react';
+import { lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
-import { Layout } from './Layout';
-import { ScrollUp } from './ScrollUp/ScrollUp';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { animateScroll as scroll } from 'react-scroll';
+
+import { Layout } from 'components/Layout/Layout';
+// import Home from 'pages/Home';
+// import MovieDetails from 'pages/MovieDetails';
+// import Movies from 'pages/Movies';
+// import NotFound from 'pages/NotFound';
+// import Reviews from './Reviews/MovieReviews/Reviews';
+// import Cast from './Cast/MovieCast/Cast';
+const Home = lazy(() => import('../pages/Home'));
+const MovieDetails = lazy(() => import('../pages/MovieDetails'));
+const Movies = lazy(() => import('../pages/Movies'));
+const NotFound = lazy(() => import('../pages/NotFound'));
+const Reviews = lazy(() =>
+  import('../components/Reviews/MovieReviews/Reviews')
+);
+const Cast = lazy(() => import('../components/Cast/MovieCast/Cast'));
 
 export const App = () => {
-  const [isScrollUp, setisScrollUp] = useState(false);
-
-  const onScroll = () => {
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    if (scrollY > 300) {
-      setisScrollUp(true);
-    } else {
-      setisScrollUp(false);
-    }
-  };
-
-  const onScrollUp = () => {
-    scroll.scrollToTop();
-    setisScrollUp(false);
-  };
-
   return (
-    <Layout onWheel={onScroll}>
-      {isScrollUp && <ScrollUp onClick={onScrollUp} />}
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="/movies/:movieId/cast" element={<Cast />} />
+            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
       <ToastContainer autoClose={3000} />
       <GlobalStyle />
-    </Layout>
+    </>
   );
 };

@@ -54,4 +54,9 @@ img {
 	label {
 		display: block;
 	}
+
+	a{
+		font-size: 18px;
+		text-decoration: none;
+	}
 `;
