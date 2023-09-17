@@ -12,9 +12,6 @@ export default function Home() {
   const controllerRef = useRef();
 
   useEffect(() => {
-    if (trendingMovies.length !== 0) {
-      return;
-    }
     if (controllerRef.current) {
       controllerRef.current.abort();
     }
@@ -36,7 +33,7 @@ export default function Home() {
     return () => {
       controllerRef.current.abort();
     };
-  }, [trendingMovies]);
+  }, []);
 
   return (
     <LayoutStyled>

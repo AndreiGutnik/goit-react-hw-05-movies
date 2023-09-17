@@ -11,6 +11,7 @@ import {
   Section,
 } from './MovieInfo.styled';
 import { LayoutStyled } from 'components/Layout/Layout.styled';
+import { PreLoaderMovie } from 'components/PreLoader/PreLoader.styled';
 
 export function MovieInfo({ movieInfo, onScroll }) {
   const location = useLocation();
@@ -24,10 +25,14 @@ export function MovieInfo({ movieInfo, onScroll }) {
       <Section>
         <LayoutStyled onWheel={() => onScroll()}>
           <MovieInfoWrap>
-            <img
-              src={`https://image.tmdb.org/t/p/w342/${movieInfo.poster_path}`}
-              alt={movieInfo.title}
-            />
+            {movieInfo.poster_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w342/${movieInfo.poster_path}`}
+                alt={movieInfo.title}
+              />
+            ) : (
+              <PreLoaderMovie />
+            )}
             <div>
               <MovieInfoTitle>{movieInfo.title}</MovieInfoTitle>
               <p>User score: {Math.round(movieInfo.vote_average * 10)}%</p>

@@ -1,4 +1,4 @@
-import { PreLoader } from 'components/PreLoader/PreLoader.styled';
+import { PreLoaderCast } from 'components/PreLoader/PreLoader.styled';
 import {
   CastCharacter,
   CastDetailWrap,
@@ -15,7 +15,7 @@ export function MovieCastItem({ cast }) {
           alt={cast.character}
         />
       ) : (
-        <PreLoader />
+        <PreLoaderCast />
       )}
       <CastDetailWrap>
         <CastName>{cast.name}</CastName>
