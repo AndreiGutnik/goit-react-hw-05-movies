@@ -7,6 +7,8 @@ export const MovieTitle = styled.h1`
 `;
 
 export const MoviesListStyled = styled.ul`
-  padding-left: 24px;
-  list-style: disc;
+  display: flex;
+  justify-content: left;
+  gap: 28px;
+  flex-wrap: wrap;
 `;

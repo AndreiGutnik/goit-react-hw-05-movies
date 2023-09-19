@@ -74,14 +74,21 @@ export const StyledLink = styled(NavLink)`
 `;
 
 export const LinkBack = styled(NavLink)`
+  display: inline-block;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 1.2;
-  text-transform: uppercase;
   color: #000000;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 8px 24px;
+  transition: transform 250ms linear, box-shadow 250ms linear;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
 
   &:hover,
   &:focus {
-    color: #1cb8d8;
+    transform: scale(1.1);
+    color: #ffffff;
+    background-color: #1cb8d8;
   }
 `;

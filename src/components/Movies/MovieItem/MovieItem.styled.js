@@ -1,21 +1,32 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const MovieItemStyled = styled.li`
-  &:not(:last-child) {
-    margin-bottom: 12px;
+  flex-basis: calc((100% - 5 * 28px) / 6);
+`;
+
+export const LinkStyled = styled(Link)`
+  display: inline-block;
+  border: 1px solid #cccccc;
+  border-radius: 12px;
+  transition: transform 250ms linear, box-shadow 250ms linear;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+
+  & img {
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
-  & a {
-    display: inline-block;
+
+  & p {
+    margin: 12px;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 1.24;
     color: #000000;
   }
 
-  & a:hover,
-  & a:focus {
-    color: #12b7dd;
+  &:hover,
+  &:focus {
     transform: scale(1.05);
-    text-decoration: underline;
   }
 `;
