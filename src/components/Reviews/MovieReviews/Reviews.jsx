@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
 import { Error } from 'components/Error/Error.styled';
@@ -10,23 +10,16 @@ export default function Reviews() {
   const [isLoader, setIsLoader] = useState(false);
   const [isError, setIsError] = useState(false);
   const { movieId } = useParams();
-  const controllerRef = useRef();
 
   useEffect(() => {
     if (movieReviews) return;
-    if (controllerRef.current) {
-      controllerRef.current.abort();
-    }
-    controllerRef.current = new AbortController();
+    const controller = new AbortController();
 
     async function getReviews() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const { results } = await getMovieReviews(
-          movieId,
-          controllerRef.current
-        );
+        const { results } = await getMovieReviews(movieId, controller);
         if (!results) {
           setIsError(true);
         }
@@ -39,7 +32,7 @@ export default function Reviews() {
     }
     getReviews();
     return () => {
-      controllerRef.current.abort();
+      controller.abort();
     };
   }, [movieReviews, movieId]);
 

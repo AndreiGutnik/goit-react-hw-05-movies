@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
 import { Error } from 'components/Error/Error.styled';
@@ -10,20 +10,16 @@ export default function Cast() {
   const [isLoader, setIsLoader] = useState(false);
   const [isError, setIsError] = useState(false);
   const { movieId } = useParams();
-  const controllerRef = useRef();
 
   useEffect(() => {
     if (movieCast) return;
-    if (controllerRef.current) {
-      controllerRef.current.abort();
-    }
-    controllerRef.current = new AbortController();
+    const controller = new AbortController();
 
     async function getCast() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const { cast } = await getMovieCast(movieId, controllerRef.current);
+        const { cast } = await getMovieCast(movieId, controller);
         if (!cast) {
           setIsError(true);
         }
@@ -36,7 +32,7 @@ export default function Cast() {
     }
     getCast();
     return () => {
-      controllerRef.current.abort();
+      controller.abort();
     };
   }, [movieCast, movieId]);
 

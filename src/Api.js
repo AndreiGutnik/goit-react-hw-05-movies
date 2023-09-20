@@ -17,10 +17,10 @@ const options = {
   },
 };
 
-export async function getTrending(controllerRef) {
+export async function getTrending(controller) {
   const { data } = await axios.request(`${END_POINT.tranding}`, {
     ...options,
-    signal: controllerRef.signal,
+    signal: controller.signal,
   });
   return data.results;
 }
@@ -33,18 +33,18 @@ export async function getMovieById(movieId, controllerRef) {
   return data;
 }
 
-export async function getMovieCast(movieId, controllerRef) {
+export async function getMovieCast(movieId, controller) {
   const { data } = await axios.request(
     `${END_POINT.movieById}${movieId}/credits`,
-    { ...options, signal: controllerRef.signal }
+    { ...options, signal: controller.signal }
   );
   return data;
 }
 
-export async function getMovieReviews(movieId, controllerRef) {
+export async function getMovieReviews(movieId, controller) {
   const { data } = await axios.request(
     `${END_POINT.movieById}${movieId}/reviews`,
-    { ...options, signal: controllerRef.signal }
+    { ...options, signal: controller.signal }
   );
   return data;
 }

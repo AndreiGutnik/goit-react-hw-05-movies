@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { getTrending } from 'Api';
 import { Error } from 'components/Error/Error.styled';
@@ -9,19 +9,15 @@ export default function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
   const [isError, setIsError] = useState(false);
-  const controllerRef = useRef();
 
   useEffect(() => {
-    if (controllerRef.current) {
-      controllerRef.current.abort();
-    }
-    controllerRef.current = new AbortController();
+    const controller = new AbortController();
 
     async function getTrendingMovies() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const movies = await getTrending(controllerRef.current);
+        const movies = await getTrending(controller);
         setTrendingMovies(movies);
       } catch (error) {
         if (error.code !== 'ERR_CANCELED') setIsError(true);
@@ -31,7 +27,7 @@ export default function Home() {
     }
     getTrendingMovies();
     return () => {
-      controllerRef.current.abort();
+      controller.abort();
     };
   }, []);
 
