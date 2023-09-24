@@ -5,12 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Layout } from 'components/Layout/Layout';
-// import Home from 'pages/Home';
-// import MovieDetails from 'pages/MovieDetails';
-// import Movies from 'pages/Movies';
-// import NotFound from 'pages/NotFound';
-// import Reviews from './Reviews/MovieReviews/Reviews';
-// import Cast from './Cast/MovieCast/Cast';
+import { routes } from 'routes';
+
 const Home = lazy(() => import('../pages/Home'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails'));
 const Movies = lazy(() => import('../pages/Movies'));
@@ -24,12 +20,12 @@ export const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path={routes.HOME} element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:movieId" element={<MovieDetails />}>
-            <Route path="/movies/:movieId/cast" element={<Cast />} />
-            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          <Route path={routes.MOVIES} element={<Movies />} />
+          <Route path={routes.MOVIEDETAILS} element={<MovieDetails />}>
+            <Route path={routes.CAST} element={<Cast />} />
+            <Route path={routes.REVIEWS} element={<Reviews />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>

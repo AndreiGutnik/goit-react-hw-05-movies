@@ -9,6 +9,7 @@ import {
   Navigation,
   StyledLink,
 } from './Layout.styled';
+import { routes } from 'routes';
 
 export function Layout() {
   return (
@@ -24,10 +25,10 @@ export function Layout() {
             </Link>
             <NavList>
               <li>
-                <StyledLink to="/">Home</StyledLink>
+                <StyledLink to={routes.HOME}>Home</StyledLink>
               </li>
               <li>
-                <StyledLink to="/movies">Movies</StyledLink>
+                <StyledLink to={routes.MOVIES}>Movies</StyledLink>
               </li>
             </NavList>
           </Navigation>

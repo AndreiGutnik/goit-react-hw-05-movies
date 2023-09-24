@@ -19,7 +19,9 @@ export default function Reviews() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const { results } = await getMovieReviews(movieId, controller);
+        const { results } = await getMovieReviews(movieId, {
+          signal: controller.signal,
+        });
         if (!results) {
           setIsError(true);
         }

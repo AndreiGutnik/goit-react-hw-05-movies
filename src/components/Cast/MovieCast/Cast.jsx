@@ -19,7 +19,9 @@ export default function Cast() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const { cast } = await getMovieCast(movieId, controller);
+        const { cast } = await getMovieCast(movieId, {
+          signal: controller.signal,
+        });
         if (!cast) {
           setIsError(true);
         }

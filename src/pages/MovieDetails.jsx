@@ -27,7 +27,9 @@ export default function MovieDetails() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const data = await getMovieById(movieId, controllerRef.current);
+        const data = await getMovieById(movieId, {
+          signal: controllerRef.current.signal,
+        });
         if (!data) {
           setIsError(true);
         }

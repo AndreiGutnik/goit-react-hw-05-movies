@@ -8,21 +8,16 @@ import {
 } from './Searchbar.styled';
 
 export const Searchbar = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  function handlerSearch(e) {
-    searchParams.set('q', e.target.value.trim().toLowerCase());
-  }
+  const [, setSearchParams] = useSearchParams();
 
   const handlerSubmit = e => {
     e.preventDefault();
     setSearchParams({});
-    const searchQuery = searchParams.get('q') ?? '';
-    if (searchQuery === '') {
+    if (e.target.movie.value === '') {
       toast.warning('Enter a value in the search bar');
       return;
     }
-    setSearchParams(searchParams);
+    setSearchParams({ q: e.target.movie.value });
   };
 
   return (
@@ -30,13 +25,7 @@ export const Searchbar = () => {
       <SearchFormButton type="submit">
         <ButtonLabel>Search</ButtonLabel>
       </SearchFormButton>
-      <SearchFormInput
-        type="text"
-        name="movie"
-        value={searchParams.q}
-        onChange={handlerSearch}
-        placeholder="Search movie"
-      />
+      <SearchFormInput type="text" name="movie" placeholder="Search movie" />
     </SearchForm>
   );
 };

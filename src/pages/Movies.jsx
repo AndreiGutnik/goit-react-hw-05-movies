@@ -26,10 +26,9 @@ export default function Movies() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const movies = await getSearchMovies(
-          searchQuery,
-          controllerRef.current
-        );
+        const movies = await getSearchMovies(searchQuery, {
+          signal: controllerRef.current.signal,
+        });
         if (movies.length === 0) setqueriedMovies([]);
         setqueriedMovies(movies);
       } catch (error) {

@@ -17,7 +17,7 @@ export default function Home() {
       try {
         setIsLoader(true);
         setIsError(false);
-        const movies = await getTrending(controller);
+        const movies = await getTrending({ signal: controller.signal });
         setTrendingMovies(movies);
       } catch (error) {
         if (error.code !== 'ERR_CANCELED') setIsError(true);
